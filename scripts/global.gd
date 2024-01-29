@@ -1,7 +1,7 @@
 extends Node
 
 var debug_mode = false
-var version = "alpha.1.1.0"
+var version = "alpha.1.1.1"
 # rules for version
 # - first word is release status, first num is major release/update, second is hotfix and 3rd just goes up when i make a commit
 

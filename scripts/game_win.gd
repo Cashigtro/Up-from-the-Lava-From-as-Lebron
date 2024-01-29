@@ -4,6 +4,7 @@ extends Control
 @onready var retry = $buttons2/retry
 @onready var http = $http
 @onready var status = $status
+@onready var pause = get_tree()
 
 
 var url = "http://dreamlo.com/lb/cDBT1v2pkEC_cuoZy7-BzQEO5o81ms5kanfKzY2LKYdQ"
@@ -16,13 +17,13 @@ func _process(delta):
 
 
 func _on_retry_pressed():
-    get_tree().paused = true
+    pause.paused = true
     get_tree().change_scene_to_file("res://scenes/levels/level"+str(global.current_level)+".tscn")
-    get_tree().paused = false
+    pause.paused = false
 
 func _on_main_menu_pressed():
     get_tree().change_scene_to_file("res://scenes/menu.tscn")
-    get_tree().paused = false
+    pause.paused = false
 
 func _on_quit_pressed():
     get_tree().quit()
@@ -41,8 +42,10 @@ func _on_finish_line_body_entered(body):
 
 
 func _on_next_level_pressed():
+    pause.paused = true
     global.current_level += 1 
+    
     get_tree().change_scene_to_file("res://scenes/levels/level"+str(global.current_level)+".tscn")
-    get_tree().paused = false
+    pause.paused = false
 
 
