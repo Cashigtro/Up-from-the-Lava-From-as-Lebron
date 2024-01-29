@@ -50,7 +50,8 @@ func populate_leaderboard(result, response_code, header, body):
         var leaderboard = JSON.parse_string(body.get_string_from_utf8())
         print(leaderboard)
         if leaderboard["dreamlo"]["leaderboard"] != null:
-            if len(leaderboard["dreamlo"]["leaderboard"]) != 1:
+            print(len(leaderboard["dreamlo"]["leaderboard"]["entry"]))
+            if len(leaderboard["dreamlo"]["leaderboard"]["entry"]) != 1:
                 print(leaderboard)
                 var leaderboard_objects = leaderboard["dreamlo"]["leaderboard"]["entry"]
                 print(leaderboard_objects)

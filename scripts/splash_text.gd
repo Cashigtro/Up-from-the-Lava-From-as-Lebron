@@ -6,7 +6,7 @@ var splash_messages: Array
 var before: String
 
 func _ready():
-    splash_messages = ["Now with semantic naming!", "now with fortnite", "now with splash textSS", "this animation is shit", "now with free robux", "comes in all colours", "jump and jump!", "try not to cry in a seat!", "be careful friends.", "now with shitty scoreboard", "speedrunsed as the world record", "big poo", "e0", "make sure to star!", "notch was here", "GO PLAY MINECRAFT", "i like chezburgers, too!", "num num num", "try not to laugh with a crumb in your mouth"]
+    splash_messages = ["Now with semantic naming!", "now with fortnite", "now with splash textSS", "this animation is shit", "now with free robux", "comes in all colours", "jump and jump!", "try not to cry in a seat!", "be careful friends.", "now with shitty scoreboard", "speedrunsed as the world record", "big poo", "e0", "make sure to star!", "notch was here", "GO PLAY MINECRAFT", "i like chezburgers, too!", "num num num", "try not to laugh with a crumb in your mouth", "holy SHIT i fixed the leaderboard"]
     splash_label.text = splash_messages.pick_random()
     
     
