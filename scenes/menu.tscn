@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://ie7jf53t0gnf"]
+[gd_scene load_steps=27 format=3 uid="uid://ie7jf53t0gnf"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_8deir"]
 [ext_resource type="Theme" uid="uid://bln0pt6y4g1m6" path="res://theme.tres" id="2_xf1vg"]
+[ext_resource type="Script" path="res://scripts/splash_text.gd" id="3_6gumx"]
 [ext_resource type="AudioStream" uid="uid://cet4c7i21mj0i" path="res://assets/audio/lebron james reloaded song_2.mp3" id="3_a2faw"]
 [ext_resource type="Script" path="res://scripts/leaderboard.gd" id="4_ddc3v"]
 [ext_resource type="Script" path="res://scripts/customization.gd" id="4_jyetr"]
@@ -31,6 +32,28 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7bn1c"]
 _data = {
 "tilting": SubResource("Animation_nw8kr")
+}
+
+[sub_resource type="Animation" id="Animation_6d8a8"]
+resource_name = "loop"
+length = 1.4975
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("title/splash_text:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.615572, 0.615572, 0.615572, 0.615572),
+"update": 0,
+"values": [0.0, -0.436332, -0.436332, 0.436332]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a05k7"]
+_data = {
+"loop": SubResource("Animation_6d8a8")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ak0q1"]
@@ -158,6 +181,27 @@ horizontal_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_7bn1c")
 }
+
+[node name="splash_text" type="Label" parent="title"]
+layout_mode = 0
+offset_left = 752.0
+offset_top = 86.0
+offset_right = 915.0
+offset_bottom = 130.0
+pivot_offset = Vector2(81.975, 23)
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 31
+text = "splash text"
+script = ExtResource("3_6gumx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="title/splash_text"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_a05k7")
+}
+autoplay = "loop"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_a2faw")
