@@ -44,8 +44,12 @@ func _on_finish_line_body_entered(body):
 func _on_next_level_pressed():
     pause.paused = true
     global.current_level += 1 
+    if FileAccess.file_exists("res://scenes/levels/level"+str(global.current_level)+".tscn"):
+        get_tree().change_scene_to_file("res://scenes/levels/level"+str(global.current_level)+".tscn")
     
-    get_tree().change_scene_to_file("res://scenes/levels/level"+str(global.current_level)+".tscn")
-    pause.paused = false
+        pause.paused = false
+    else:
+        get_tree().change_scene_to_file("res://scenes/menu.tscn")
+        pause.paused = false
 
 
