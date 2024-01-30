@@ -13,7 +13,7 @@ func _ready():
         grid.add_child(button)
     grid.add_child(HSeparator.new())
     for file in DirAccess.get_files_at(og_level):
-        if file == "main.tscn":
+        if file != "main.tscn":
             var button = Button.new()
             button.text = file.split(".")[0]
             button.pressed.connect(open_scene.bind(og_level + file))

@@ -230,6 +230,7 @@ theme = ExtResource("2_xf1vg")
 text = "Play"
 
 [node name="editor" type="Button" parent="buttons"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_xf1vg")

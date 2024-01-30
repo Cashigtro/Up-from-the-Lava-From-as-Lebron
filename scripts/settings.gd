@@ -9,9 +9,9 @@ func _ready():
 
 
 func music_off(button_pressed):
-    if button_pressed:
-        audio.stop()
     if !button_pressed:
+        audio.stop()
+    if button_pressed:
         audio.play()
 
 

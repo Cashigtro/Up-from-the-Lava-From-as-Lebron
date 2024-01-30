@@ -19,7 +19,7 @@ func _ready():
 #	audio.play(7)
 	audio.play()
 	version.text = "Version: " + str(global.version)
-	tab_container.set_tab_disabled(2, true)
+	# tab_container.set_tab_disabled(2, true)
 
 
 func _process(delta):
