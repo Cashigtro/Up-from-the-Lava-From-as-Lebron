@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ie7jf53t0gnf"]
+[gd_scene load_steps=28 format=3 uid="uid://ie7jf53t0gnf"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_8deir"]
 [ext_resource type="Theme" uid="uid://bln0pt6y4g1m6" path="res://theme.tres" id="2_xf1vg"]
@@ -51,9 +51,27 @@ tracks/0/keys = {
 "values": [0.0, -0.436332, -0.436332, 0.436332]
 }
 
+[sub_resource type="Animation" id="Animation_on1oe"]
+resource_name = "loop2"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("title/splash_text:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.349066, -0.349066, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a05k7"]
 _data = {
-"loop": SubResource("Animation_6d8a8")
+"loop": SubResource("Animation_6d8a8"),
+"loop2": SubResource("Animation_on1oe")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ak0q1"]
@@ -146,6 +164,7 @@ offset_top = 43.0
 offset_right = 1047.0
 offset_bottom = 130.0
 grow_horizontal = 2
+rotation = -0.0415986
 pivot_offset = Vector2(491, 43)
 theme = ExtResource("2_xf1vg")
 theme_override_font_sizes/font_size = 61
@@ -188,6 +207,7 @@ offset_left = 752.0
 offset_top = 86.0
 offset_right = 915.0
 offset_bottom = 130.0
+rotation = -0.134945
 pivot_offset = Vector2(81.975, 23)
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -201,7 +221,7 @@ root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_a05k7")
 }
-autoplay = "loop"
+autoplay = "loop2"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_a2faw")
@@ -639,4 +659,3 @@ alignment = 0
 [connection signal="pressed" from="settings/settings_box/credits/VBoxContainer/iggames" to="settings/settings_box/credits" method="_on_iggames_pressed"]
 [connection signal="pressed" from="settings/settings_box/credits/VBoxContainer/websoket" to="settings/settings_box/credits" method="_on_websoket_pressed"]
 [connection signal="pressed" from="settings/settings_box/credits/VBoxContainer/speedrunsed" to="settings/settings_box/credits" method="_on_speedrunsed_pressed"]
-[connection signal="pressed" from="settings/settings_box/credits/VBoxContainer/chair" to="settings/settings_box/credits" method="_on_speedrunsed_pressed"]

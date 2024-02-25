@@ -5,16 +5,23 @@ extends Control
 @onready var http = $http
 @onready var status = $status
 @onready var pause = get_tree()
+@onready var buttons = $buttons2
 
+var buttons_disabled = true
 
 var url = "http://dreamlo.com/lb/cDBT1v2pkEC_cuoZy7-BzQEO5o81ms5kanfKzY2LKYdQ"
 var method = HTTPClient.METHOD_GET
 
 
 
-func _process(delta):
-    score.text = "Score: " + str(global.score)
+func _ready():
+    if get_tree().current_scene.name == "level1":
 
+        score.text = "unsupported leaderboard level!"
+    else: 
+        score.text = "Score: " + str(global.score)
+        for btn in buttons.get_children():
+            btn.disabled = true
 
 func _on_retry_pressed():
     pause.paused = true
@@ -38,7 +45,8 @@ func _on_finish_line_body_entered(body):
     var score = (Time.get_ticks_msec() - global.global_start_time)
     var request = url + "/add/" + str(global.local_name) + "/" + str(score)
     print(request)
-    http.request(request, PackedStringArray(), method)
+    if get_tree().current_scene.name == "level1":
+        http.request(request, PackedStringArray(), method)
 
 
 func _on_next_level_pressed():
