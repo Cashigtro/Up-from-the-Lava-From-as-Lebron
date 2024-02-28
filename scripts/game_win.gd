@@ -11,8 +11,8 @@ var buttons_disabled = true
 var leaderboard_level = false
 @onready var current_level = ""
 
-var url = "https://up-from-the-lava-from-as-lebro-default-rtdb.asia-southeast1.firebasedatabase.app"
-var method = HTTPClient.METHOD_POST
+var url = "http://dreamlo.com/lb/cDBT1v2pkEC_cuoZy7-BzQEO5o81ms5kanfKzY2LKYdQ"
+var method = HTTPClient.METHOD_GET
 
 func _process(delta):
     current_level = get_tree().current_scene.scene_file_path.split("/")[-1].split(".")[0]
@@ -46,7 +46,6 @@ func _on_quit_pressed():
     
 func _on_http_request_request_completed(result, response_code, headers, body):
     print(result, response_code, headers, body.get_string_from_utf8())
-    print("/\\ is the")
     status.text = "saved " + str(global.score) + " as " + str(global.local_name) + "."
     
     if buttons_disabled == true: 
@@ -68,24 +67,12 @@ func _on_finish_line_body_entered(body):
         print("sadf"+current_level)
 
         var score = (Time.get_ticks_msec() - global.global_start_time)
-        var unix = Time.get_unix_time_from_system()
-
-        # var data = PackedStringArray(['{"data":{"time":' + str(unix) + ', "score": ' + str(score) + '}}'])
-        # var data = {"data":{"time": + str(unix) + ',' "score":  + str(score) + }}
-        var data = {"data":{"time": str(unix), "score": str(score)}}
-        var data_string = HTTPClient.new().query_string_from_dict(data)
-        var data_arr = PackedStringArray([str(data_string)])
-        var headers = PackedStringArray(['"Content-Type: application/json", "Content-Length: " + str(data_string.length())'])
-
-        var request = url + "/scores/" + str(global.local_name) + ".json"
+        var request = url + "/add/" + str(global.local_name) + "/" + str(score)
         print(request)
-        # var http = HTTPClient.new()
-    
+        # var http = HTTPRequest.new()
         # http.request_completed.connect(_on_http_request_completed)
-        var resp = http.request(request, data_arr, method)
-        print(resp)
+        http.request(request, PackedStringArray(), method)
 
-        # var result = http.request(http.METHOD_PATCH, request, headers, data_string)
 
 func _on_next_level_pressed():
     pause.paused = true
