@@ -1,7 +1,7 @@
 extends HTTPRequest
 
 @onready var people = $"../people"
-var url = "http://dreamlo.com/lb/cDBT1v2pkEC_cuoZy7-BzQEO5o81ms5kanfKzY2LKYdQ"
+var url = "https://ignitro.xyz/api/uftlfal_lb_api"
 var leaderboard
 var method = HTTPClient.METHOD_GET
 var arrow = preload("res://assets/images/arrow_right.png")
@@ -13,7 +13,7 @@ signal more_info_button_pressed(rank, player_name)
 
 func _ready():
     connect("request_completed", populate_leaderboard)
-    request(url + "/json-seconds", PackedStringArray(), method)
+    request(url + "/get/top/1000", PackedStringArray(), method)
     
 func clear_scores():
     for i in people.get_children():
@@ -45,15 +45,15 @@ func get_time(msec_time):
     return str(minutes) + ":" + str(seconds) + "." + str(milliseconds)
 
 func populate_leaderboard(result, response_code, header, body):
-    
+    print(body.get_string_from_utf8())
     if body:
         var leaderboard = JSON.parse_string(body.get_string_from_utf8())
-        print(leaderboard)
-        if leaderboard["dreamlo"]["leaderboard"] != null:
-            print(len(leaderboard["dreamlo"]["leaderboard"]["entry"]))
-            if len(leaderboard["dreamlo"]["leaderboard"]["entry"]) != 1:
+        print("lbL "+ str(leaderboard))
+        if leaderboard != null:
+            print(len(leaderboard))
+            if len(leaderboard) != 1:
                 print(leaderboard)
-                var leaderboard_objects = leaderboard["dreamlo"]["leaderboard"]["entry"]
+                var leaderboard_objects = leaderboard
                 print(leaderboard_objects)
                 
                 clear_scores()
@@ -61,7 +61,7 @@ func populate_leaderboard(result, response_code, header, body):
                 var count = 0
                 for i in leaderboard_objects:
                     var label = Label.new()
-                    label.text = (str(count+1) + "# " + i['name'] + ": " + i['score'])
+                    label.text = (str(count+1) + "# " + i['user'] + ": " + i['score'])
                     
                     if count == 0:
                         label.label_settings = LabelSettings.new()
@@ -81,7 +81,7 @@ func populate_leaderboard(result, response_code, header, body):
                         label.label_settings.font_size = 12
                         label.label_settings.font_color = Color(255,255,255)
                         
-                    label.text = (str(count+1) + "# " + i['name'] + ": " + get_time(int(i['score'])))
+                    label.text = (str(count+1) + "# " + i['user'] + ": " + get_time(int(i['score'])))
 
                     
                     people.add_child(label)

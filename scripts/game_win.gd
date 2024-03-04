@@ -11,8 +11,8 @@ var buttons_disabled = true
 var leaderboard_level = false
 @onready var current_level = ""
 
-var url = "http://dreamlo.com/lb/cDBT1v2pkEC_cuoZy7-BzQEO5o81ms5kanfKzY2LKYdQ"
-var method = HTTPClient.METHOD_GET
+var url = "https://ignitro.xyz/api/uftlfal_lb_api"
+var method = HTTPClient.METHOD_POST
 
 func _process(delta):
     current_level = get_tree().current_scene.scene_file_path.split("/")[-1].split(".")[0]
@@ -67,7 +67,7 @@ func _on_finish_line_body_entered(body):
         print("sadf"+current_level)
 
         var score = (Time.get_ticks_msec() - global.global_start_time)
-        var request = url + "/add/" + str(global.local_name) + "/" + str(score)
+        var request = url + "/add/user/" + str(global.local_name) + "/score?value=" + str(score)
         print(request)
         # var http = HTTPRequest.new()
         # http.request_completed.connect(_on_http_request_completed)
