@@ -9,6 +9,8 @@ var JUMP_VELOCITY = -460
 #defailt gravity is 980
 var gravity = 980
 var coyote_timer = 0
+var jump_count = 0 
+var jump_max = 1
 
 func _ready():
     name_label.text = global.local_name
@@ -24,13 +26,17 @@ func _physics_process(delta):
 
     else:
         sprite.frame = 1
-    
-    print("c: " + str(coyote_timer))
-    # Handle Jump.
-    if Input.is_action_just_pressed("ui_accept") and is_on_floor() or Input.is_action_just_pressed("ui_accept") and coyote_timer >= 1:
-        velocity.y = JUMP_VELOCITY
         coyote_timer = 0
         
+    print("c: " + str(coyote_timer) + ", jc" + str(jump_count))
+    # Handle Jump.
+    if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or coyote_timer > 0 and jump_count < jump_max):
+        jump_count+=1
+        velocity.y = JUMP_VELOCITY
+        coyote_timer = 0
+    
+    if is_on_floor() and jump_count >= jump_max:
+        jump_count = 0
     var direction = Input.get_axis("left", "right")
     if direction:
         velocity.x = direction * SPEED
