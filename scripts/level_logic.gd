@@ -6,6 +6,7 @@ extends Node2D
 @onready var death = $sound/death
 
 
+
 func _on_lava_body_entered(body):
     if body.name == "player":
         game_over()

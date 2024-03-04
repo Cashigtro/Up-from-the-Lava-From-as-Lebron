@@ -8,6 +8,7 @@ var JUMP_VELOCITY = -460
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #defailt gravity is 980
 var gravity = 980
+var coyote_timer = 0
 
 func _ready():
     name_label.text = global.local_name
@@ -19,13 +20,16 @@ func _physics_process(delta):
     if not is_on_floor():
         velocity.y += gravity * delta
         sprite.frame = 0
+        coyote_timer += delta
+
     else:
         sprite.frame = 1
     
-
+    print("c: " + str(coyote_timer))
     # Handle Jump.
-    if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+    if Input.is_action_just_pressed("ui_accept") and is_on_floor() or Input.is_action_just_pressed("ui_accept") and coyote_timer >= 1:
         velocity.y = JUMP_VELOCITY
+        coyote_timer = 0
         
     var direction = Input.get_axis("left", "right")
     if direction:
